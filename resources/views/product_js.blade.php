@@ -25,6 +25,7 @@ headers: {
                     if(res.status=='success'){
                         $('#exampleModal').modal('hide');
                         $('#addproductForm')[0].reset();
+                        $('.table').load(location.href+' .table');
                     }
                 },
                 error:function(err){

@@ -8,7 +8,8 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function ProductController(){
-        return view('products');
+        $products = Product::latest()->paginate(10);
+        return view('products',compact('products'));
     }
     
     public function AddProduct(Request $request){
