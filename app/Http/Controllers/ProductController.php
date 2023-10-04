@@ -12,7 +12,7 @@ class ProductController extends Controller
         return view('products',compact('products'));
     }
     
-    //add prodect
+    //add prodect data
     public function AddProduct(Request $request){
         $request->validate(
             [
@@ -35,7 +35,7 @@ class ProductController extends Controller
         ]);
     }
 
-    //update prodect
+    //update prodect data
     public function updateProduct(Request $request){
         $request->validate(
             [
@@ -58,4 +58,13 @@ class ProductController extends Controller
             'status'=>'success',
         ]);
     }
+
+    // delete product data
+    public function deleteProduct(Request $request){
+        Product::find($request->product_id)->delete();
+        return response()->json([
+            'status'=>'success',
+        ]);
+    }
+
 }
