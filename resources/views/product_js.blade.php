@@ -47,5 +47,32 @@ headers: {
             $('#up_name').val(name);
             $('#up_price').val(price);
         });
+
+        // update product data
+        $(document).on('click','.update_product',function(e){
+            e.preventDefault();
+            let up_id = $('#up_id').val();
+            let up_name = $('#up_name').val();
+            let up_price = $('#up_price').val();
+
+            $.ajax({
+                url:"{{ route('update.product') }}",
+                method:'post',
+                data:{up_id:up_id,up_name:up_name,up_price:up_price},
+                success:function(res){
+                    if(res.status=='success'){
+                        $('#updateModal').modal('hide');
+                        $('#updateproductForm')[0].reset();
+                        $('.table').load(location.href+' .table');
+                    }
+                },
+                error:function(err){
+                    let error = err.responseJSON;
+                    $.each(error.errors,function(index, value){
+                        $('.errorMessage').append('<span class="text-danger">'+value+'</span>'+'<br>');
+                    });
+                }
+            })
+        })
     })
 </script>
